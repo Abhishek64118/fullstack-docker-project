@@ -56,7 +56,6 @@ func InitializePostgresClient() {
 	if err != nil {
 		fmt.Println("Warning: No .env file found or failed to load")
 	}
- {
 	postgresHost := os.Getenv("POSTGRES_HOST")
 	postgresUser := common.FallbackString(os.Getenv("POSTGRES_USER"), "postgres")
 	postgresPassword := common.FallbackString(os.Getenv("POSTGRES_PASSWORD"), "postgres")
