@@ -17,30 +17,20 @@ services:
       - 8080:8080
     environment:
       - REDIS_HOST=redis_server
-      - POSTGRES_HOST=postgres_server
-      - POSTGRES_USER=postgres
+      - POSTGRES_HOST=postgresdb.cdycekoq2v46.eu-north-1.rds.amazonaws.com
+      - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DATABASE=postgres
+      - POSTGRES_DATABASE=mydb
       - REQUEST_ORIGIN=http://localhost
 
     container_name: backend
     depends_on:
-      - postgres_server
       - redis_server
 
   redis_server:
     image: redis
     restart: unless-stopped
     container_name: redis
-
-  postgres_server:
-    image: postgres:13.2-alpine
-    restart: unless-stopped
-    environment:
-      POSTGRES_PASSWORD: postgres
-    container_name: postgres
-    volumes:
-      - database:/var/lib/postgresql/data
 
   reverse_proxy:
     image: nginx:1.19-alpine
